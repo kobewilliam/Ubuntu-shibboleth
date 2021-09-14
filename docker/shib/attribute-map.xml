@@ -1,0 +1,70 @@
+<Attributes xmlns="urn:mace:shibboleth:2.0:attribute-map" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!-- This is a custom attribute-map.xml file with commonly used attributes that are currently registred with the UCI Single Sign On (SSO). Please determine the attributes your applcation will be leveraging and workign with the IAM team to release the attributes from UCI SSO.
+
+To leverage an attribute, please comment out the attributes the UCI SSO is releasing to your application.
+-->  
+    
+<!-- Identifer Attributes -->
+
+    <Attribute name="urn:oid:2.16.840.1.113916.5.6.1.8" id="SHIB_uciCampusID"/>
+    <Attribute name="urn:oid:2.16.840.1.113916.5.6.1.1" id="SHIB_UCInetID"/>
+    <Attribute name="urn:oid:0.9.2342.19200300.100.1.1" id="SHIB_uid"/>	        
+    <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" id="SHIB_eduPersonTargetedID"/>
+    <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" id="SHIB_eppn">
+    	<AttributeDecoder xsi:type="ScopedAttributeDecoder" caseSensitive="false" scopeDelimiter="@"/>
+    </Attribute>	
+    <Attribute name="urn:oid:2.16.840.1.113730.3.1.3" id="SHIB_employeeNumber"/>    
+    <Attribute name="urn:oasis:names:tc:SAML:attribute:subject-id" id="SHIB_subject-id">
+    	<AttributeDecoder xsi:type="ScopedAttributeDecoder" caseSensitive="false"/>
+    </Attribute>
+  
+    <Attribute name="urn:oasis:names:tc:SAML:attribute:pairwise-id" id="SHIB_pairwise-id">
+        <AttributeDecoder xsi:type="ScopedAttributeDecoder" caseSensitive="false"/>
+    </Attribute>
+
+    
+<!-- Common Higher Ed Attributes -->
+
+    <Attribute name="urn:oid:0.9.2342.19200300.100.1.3" id="SHIB_mail"/>
+    <Attribute name="urn:oid:2.16.840.1.113730.3.1.241" id="SHIB_displayName"/>
+    <Attribute name="urn:oid:2.5.4.3" id="SHIB_cn"/>
+    <Attribute name="urn:oid:2.5.4.4" id="SHIB_sn"/>
+    <Attribute name="urn:oid:2.5.4.42" id="SHIB_givenName"/>   
+    <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.9" id="SHIB_eduPersonScopedAffiliation"/>   
+    <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.1" id="SHIB_eduPersonAffiliation"/>   
+
+
+<!-- Common UC Wide Attributes --> 
+
+    <Attribute name="urn:oid:2.16.840.1.113916.1.1.7" id="SHIB_ucTrustShortCampusID"/>   
+    <Attribute name="urn:oid:2.16.840.1.113916.1.1.4.1" id="SHIB_ucNetID"/>       
+    <Attribute name="urn:oid:2.16.840.1.113916.1.1.5" id="SHIB_ucTrustAssurance"/>       
+
+    
+<!-- Common UCI Attributes -->
+
+    <Attribute name="https://shib.service.uci.edu/schema/attributes/ksamsRoles" id="SHIB_ksamsRole"/>
+    <Attribute name="urn:oid:2.16.840.1.113916.5.6.1.59" id="SHIB_uciAffiliation"/>
+
+    
+<!-- UCI Employee/Guest Based Attributes -->
+  
+    <Attribute name="urn:oid:2.16.840.1.113916.5.2.1.39" id="SHIB_uciLevel2DepartmentID"/>
+    <Attribute name="urn:oid:2.16.840.1.113916.5.2.1.41" id="SHIB_uciLevel3DepartmentID"/>
+    <Attribute name="urn:oid:2.16.840.1.113916.5.2.1.43" id="SHIB_uciLevel4DepartmentID"/>
+    <Attribute name="2.16.840.1.113916.5.2.1.9" id="SHIB_uciOrganizationCode"/>
+    <Attribute name="urn:oid:2.5.4.20" id="SHIB_telephoneNumber"/>    
+    <Attribute name="urn:oid:2.16.840.1.113730.3.1.2" id="SHIB_departmentNumber"/>    
+    <Attribute name="urn:oid:2.16.840.1.113916.5.6.1.2" id="SHIB_department"/>                                
+   
+    
+<!-- UCI Student Based Attributes -->
+ 
+    <Attribute name="urn:oid:2.16.840.1.113916.5.1.1.58" id="SHIB_uciStudentMajorCode"/>
+    <Attribute name="urn:oid:2.16.840.1.113916.5.1.1.62" id="SHIB_uciHousingResident"/>
+    <Attribute name="urn:oid:2.16.840.1.113916.5.6.1.4" id="SHIB_major"/>
+    <Attribute name="urn:oid:2.16.840.1.113916.5.6.1.3" id="SHIB_uciStudentID"/>
+
+
+</Attributes>
