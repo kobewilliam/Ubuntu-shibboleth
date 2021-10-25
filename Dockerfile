@@ -20,9 +20,9 @@ RUN mkdir /etc/apache2/ssl
 COPY ./docker/ssl/graphdb.key /etc/apache2/ssl/server.key
 COPY ./docker/ssl/graphdb.csr /etc/apache2/ssl/server.csr
 
-RUN openssl x509 -req -days 1800 -in /etc/apache2/ssl/server.csr \ 
-    -signkey /etc/apache2/ssl/server.key \
-    -out /etc/apache2/ssl/server.crt
+#RUN openssl x509 -req -days 1800 -in /etc/apache2/ssl/server.csr \ 
+#    -signkey /etc/apache2/ssl/server.key \
+#    -out /etc/apache2/ssl/server.crt 
 
 # enable SSL on the apache server
 RUN a2enmod ssl
@@ -37,15 +37,15 @@ RUN a2ensite 000-shib
 # download the shibboleth repo
 # shibboleth 3.2.2
 WORKDIR /downloads
-RUN apt install -y curl
+RUN apt-get install -y curl
 RUN curl --fail --remote-name \
   https://pkg.switch.ch/switchaai/ubuntu/dists/focal/main/binary-all/misc/switchaai-apt-source_1.0.0~ubuntu20.04.1_all.deb
-RUN apt install ./switchaai-apt-source_1.0.0~ubuntu20.04.1_all.deb
-RUN apt update
+RUN apt-get install ./switchaai-apt-source_1.0.0~ubuntu20.04.1_all.deb
+RUN apt-get update
 
 # install shibboleth
-RUN apt install -y --install-recommends shibboleth
-RUN apt -y full-upgrade
+RUN apt-get install -y --install-recommends shibboleth
+RUN apt-get -y full-upgrade
 
 # ===========================================================================
 
@@ -72,3 +72,4 @@ ENTRYPOINT ["/entrypoint-shib.sh"]
 
 # save space
 RUN apt autoclean && apt autoremove
+
