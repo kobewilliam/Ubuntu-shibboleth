@@ -18,15 +18,16 @@ RUN mkdir /etc/apache2/ssl
 #  -subj "/C=US"
 
 COPY ./docker/ssl/graphdb.key /etc/apache2/ssl/server.key
-COPY ./docker/ssl/graphdb.csr /etc/apache2/ssl/server.csr
+#COPY ./docker/ssl/graphdb.csr /etc/apache2/ssl/server.csr
+COPY ./docker/ssl/graphdb_ics_uci_edu_cert.cer /etc/apache2/ssl/server.crt
 
 #RUN openssl x509 -req -days 1800 -in /etc/apache2/ssl/server.csr \ 
 #    -signkey /etc/apache2/ssl/server.key \
-#    -out /etc/apache2/ssl/server.crt 
+#    -out /etc/apache2/ssl/server.crt
 
 # enable SSL on the apache server
 RUN a2enmod ssl
-
+RUN a2enmod proxy
 # replace the default site with our own site
 COPY ./docker/httpd.conf /etc/apache2/sites-available/000-shib.conf
 RUN a2dissite 000-default
@@ -61,7 +62,8 @@ COPY ./docker/shib/inc-md-cert-mdq.pem /etc/shibboleth/
 COPY ./docker/shib.conf /etc/apache2/conf-enabled
 
 # Copy the secure directory from the local to the apach server
-COPY ./docker/secure/ /var/www/html/secure/
+COPY ./docker/secure /var/www/html
+
 
 # run entrypoint script to generate shibboleth2.xml
 # based on entity ID received from runtime argument
