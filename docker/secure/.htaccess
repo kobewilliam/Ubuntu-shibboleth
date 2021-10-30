@@ -1,7 +1,4 @@
-<IfModule mod_headers.c>
-Header add Access-Control-Allow-Origin: *
-</IfModule>
-
+#LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
@@ -13,6 +10,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule . /index.html [L]
+RewriteRule . /dist/index.html [L]
 
 </IfModule>

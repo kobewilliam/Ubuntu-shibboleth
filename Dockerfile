@@ -28,6 +28,7 @@ COPY ./docker/ssl/graphdb_ics_uci_edu_cert.cer /etc/apache2/ssl/server.crt
 # enable SSL on the apache server
 RUN a2enmod ssl
 RUN a2enmod proxy
+RUN a2enmod rewrite
 # replace the default site with our own site
 COPY ./docker/httpd.conf /etc/apache2/sites-available/000-shib.conf
 RUN a2dissite 000-default
@@ -62,9 +63,9 @@ COPY ./docker/shib/inc-md-cert-mdq.pem /etc/shibboleth/
 COPY ./docker/shib.conf /etc/apache2/conf-enabled
 
 # Copy the secure directory from the local to the apach server
-COPY ./docker/secure /var/www/html
+COPY ./docker/secure/dist /var/www/html/dist
 
-
+COPY ./docker/secure/.htaccess /var/www/html/.htaccess
 # run entrypoint script to generate shibboleth2.xml
 # based on entity ID received from runtime argument
 RUN apt install -y gettext
@@ -75,3 +76,5 @@ ENTRYPOINT ["/entrypoint-shib.sh"]
 # save space
 RUN apt autoclean && apt autoremove
 
+#update permissions
+RUN chmod -R 555 /var/www/html/dist
