@@ -27,8 +27,7 @@
         -->
        <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
                   checkAddress="false" handlerSSL="true" cookieProps="https"
-                  redirectLimit="exact">
-
+                  redirectLimit="exact+allow" redirectAllow="https://shib.nacs.uci.edu/">
             <!--
             Configures SSO for a default IdP. To properly allow for >1 IdP, remove
             entityID property and adjust discoveryURL to point to discovery service.
@@ -41,10 +40,12 @@
             </SSO>
 
             <!-- SAML and local-only logout. -->
-            <Logout>SAML2 Local</Logout>
+            <Logout>Local</Logout>
 
             <!-- Administrative logout. -->
             <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1 ::1" />
+            <!-- System logout. -->
+            <LogoutInitiator type="Local" Location="/Logout" />
 
             <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
             <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
