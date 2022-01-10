@@ -29,6 +29,8 @@ COPY ./docker/ssl/graphdb_ics_uci_edu_cert.cer /etc/apache2/ssl/server.crt
 RUN a2enmod ssl
 RUN a2enmod proxy
 RUN a2enmod rewrite
+RUN a2enmod headers
+
 # replace the default site with our own site
 COPY ./docker/httpd.conf /etc/apache2/sites-available/000-shib.conf
 RUN a2dissite 000-default
