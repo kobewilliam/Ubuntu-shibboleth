@@ -21,7 +21,7 @@ COPY ./docker/ssl/graphdb.key /etc/apache2/ssl/server.key
 #COPY ./docker/ssl/graphdb.csr /etc/apache2/ssl/server.csr
 COPY ./docker/ssl/graphdb_ics_uci_edu_cert.cer /etc/apache2/ssl/server.crt
 
-#RUN openssl x509 -req -days 1800 -in /etc/apache2/ssl/server.csr \ 
+#RUN openssl x509 -req -days 1800 -in /etc/apache2/ssl/server.csr \
 #    -signkey /etc/apache2/ssl/server.key \
 #    -out /etc/apache2/ssl/server.crt
 
@@ -29,8 +29,6 @@ COPY ./docker/ssl/graphdb_ics_uci_edu_cert.cer /etc/apache2/ssl/server.crt
 RUN a2enmod ssl
 RUN a2enmod proxy
 RUN a2enmod rewrite
-RUN a2enmod headers
-
 # replace the default site with our own site
 COPY ./docker/httpd.conf /etc/apache2/sites-available/000-shib.conf
 RUN a2dissite 000-default
