@@ -39,11 +39,11 @@ RUN a2ensite 000-shib
 # download the shibboleth repo
 # shibboleth 3.2.2
 WORKDIR /downloads
+RUN apt-get update
 RUN apt-get install -y curl
 RUN curl --fail --remote-name \
   https://pkg.switch.ch/switchaai/ubuntu/dists/focal/main/binary-all/misc/switchaai-apt-source_1.0.0~ubuntu20.04.1_all.deb
 RUN apt-get install ./switchaai-apt-source_1.0.0~ubuntu20.04.1_all.deb
-RUN apt-get update
 
 # install shibboleth
 RUN apt-get install -y --install-recommends shibboleth
