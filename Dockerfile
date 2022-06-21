@@ -1,7 +1,9 @@
 FROM ubuntu:focal
 
-RUN apt upgrade
-RUN apt update
+RUN apt -y upgrade
+RUN apt -y update
+RUN apt-get -y upgrade
+RUN apt-get -y update
 
 # ===========================================================================
 # download apache, use the noninteractive installation for docker setup
@@ -17,9 +19,9 @@ RUN mkdir /etc/apache2/ssl
 #  -keyout /etc/apache2/ssl/server.key \
 #  -subj "/C=US"
 
-COPY ./docker/ssl/graphdb.key /etc/apache2/ssl/server.key
+COPY ./docker/ssl/graphdb_new.key /etc/apache2/ssl/server.key
 #COPY ./docker/ssl/graphdb.csr /etc/apache2/ssl/server.csr
-COPY ./docker/ssl/graphdb_ics_uci_edu_cert.cer /etc/apache2/ssl/server.crt
+COPY ./docker/ssl/graphdb_ics_uci_edu_cert_new.cer /etc/apache2/ssl/server.crt
 
 #RUN openssl x509 -req -days 1800 -in /etc/apache2/ssl/server.csr \
 #    -signkey /etc/apache2/ssl/server.key \
@@ -39,13 +41,13 @@ RUN a2ensite 000-shib
 # download the shibboleth repo
 # shibboleth 3.2.2
 WORKDIR /downloads
-RUN apt-get update
 RUN apt-get install -y curl
 RUN curl --fail --remote-name \
   https://pkg.switch.ch/switchaai/ubuntu/dists/focal/main/binary-all/misc/switchaai-apt-source_1.0.0~ubuntu20.04.1_all.deb
 RUN apt-get install ./switchaai-apt-source_1.0.0~ubuntu20.04.1_all.deb
 
 # install shibboleth
+RUN apt-get update
 RUN apt-get install -y --install-recommends shibboleth
 RUN apt-get -y full-upgrade
 
